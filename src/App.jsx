@@ -8,9 +8,9 @@ import { Teachers } from "./pages/TeachersPages";
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<Home />} />;
-      <Route path="/teachers" element={<Teachers />} />;
-      <Route path="*" element={<Home />} />
+      <Route exact path="/" element={<Home />} />;
+      <Route exact path="/teachers" element={<Teachers />} />;
+      <Route exact path="*" element={<Home />} />
     </Routes>
   );
 }
