@@ -31,11 +31,13 @@ export const ModalForm = ({ onClose, nameForm }) => {
               auth,
               values.email,
               values.password
-            ).then(() =>
-              updateProfile(auth.currentUser, {
-                displayName: values.displayName,
-              })
-            );
+            )
+              .then(() =>
+                updateProfile(auth.currentUser, {
+                  displayName: values.displayName,
+                })
+              )
+              .catch((err) => console.error(err));
           // console.log("values", values);
           // const { cardTitle: title, cardDescr: description } = values;
           // const form = {
