@@ -12,8 +12,10 @@ import {
 import sprite from "../assets/img/sprite.svg";
 import { Footer } from "../componens/Footer";
 import { Header } from "../componens/Header";
+import { auth } from "../firebase";
 
 export const Home = () => {
+  console.log("app", auth);
   return (
     <HomeWrap>
       <Header></Header>

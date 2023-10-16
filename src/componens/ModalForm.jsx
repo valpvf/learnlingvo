@@ -1,4 +1,8 @@
 import { Formik, Form, ErrorMessage } from "formik";
+import {
+  createUserWithEmailAndPassword,
+  updateProfile,
+} from "firebase/auth";
 import Modal from "./Modal";
 import {
   InputStyled,
@@ -7,9 +11,12 @@ import {
   ModalTitle,
 } from "./ModalForm.styled";
 import { dataModalForm } from "../assets/constant";
+import { auth } from "../firebase";
 
 export const ModalForm = ({ onClose, nameForm }) => {
-  const data = dataModalForm(Boolean(nameForm === "Registration"));
+  const isNameForm = Boolean(nameForm === "Registration");
+  const data = dataModalForm(isNameForm);
+  console.log("auth", auth.currentUser);
   return (
     <Modal onClose={onClose}>
       <ModalTitle>{nameForm}</ModalTitle>
@@ -19,7 +26,17 @@ export const ModalForm = ({ onClose, nameForm }) => {
         initialValues={data.initial}
         validationSchema={data.TitleSchema}
         onSubmit={(values, { resetForm }) => {
-          console.log("values", values);
+          isNameForm &&
+            createUserWithEmailAndPassword(
+              auth,
+              values.email,
+              values.password
+            ).then(() =>
+              updateProfile(auth.currentUser, {
+                displayName: values.displayName,
+              })
+            );
+          // console.log("values", values);
           // const { cardTitle: title, cardDescr: description } = values;
           // const form = {
           //   title,
@@ -51,17 +68,17 @@ export const ModalForm = ({ onClose, nameForm }) => {
       >
         {({ handleChange, values }) => (
           <Form>
-            {nameForm === "Registration" && (
+            {isNameForm && (
               <>
                 <InputStyled
                   placeholder="Name"
-                  id="name"
-                  name="name"
+                  id="displayName"
+                  name="displayName"
                   type="text"
                   onChange={handleChange}
-                  value={values.name}
+                  value={values.displayName}
                 />
-                <ErrorMessage name="name" component={"p"} />
+                <ErrorMessage name="displayName" component={"p"} />
               </>
             )}
             <label htmlFor="email"></label>
