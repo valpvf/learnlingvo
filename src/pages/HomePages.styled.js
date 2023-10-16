@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
-import sprite from "/src/assets/img/sprite.svg";
+// import sprite from "/src/assets/img/sprite.svg";
+import boy from "/src/assets/img/boy.png";
 
 export const HomeWrap = styled.div`
   display: flex;
@@ -64,7 +65,7 @@ export const Visual = styled.section`
   aspect-ratio: calc(570 / 500);
   /* height: 100%; */
   border-radius: 30px;
-  background: url(src/assets/img/boy.png),
+  background: url(${boy}),
     linear-gradient(
       to right,
       rgba(251, 233, 186, 1),
