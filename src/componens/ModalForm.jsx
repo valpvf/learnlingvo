@@ -1,6 +1,7 @@
 import { Formik, Form, ErrorMessage } from "formik";
 import {
   createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
   updateProfile,
 } from "firebase/auth";
 import Modal from "./Modal";
@@ -14,6 +15,7 @@ import { dataModalForm } from "../assets/constant";
 import { auth } from "../firebase";
 
 export const ModalForm = ({ onClose, nameForm }) => {
+  // const { auth } = useContext(Context);
   const isNameForm = Boolean(nameForm === "Registration");
   const data = dataModalForm(isNameForm);
   console.log("auth", auth.currentUser);
@@ -26,18 +28,37 @@ export const ModalForm = ({ onClose, nameForm }) => {
         initialValues={data.initial}
         validationSchema={data.TitleSchema}
         onSubmit={(values, { resetForm }) => {
-          isNameForm &&
-            createUserWithEmailAndPassword(
-              auth,
-              values.email,
-              values.password
-            )
-              .then(() =>
-                updateProfile(auth.currentUser, {
-                  displayName: values.displayName,
-                })
+          isNameForm
+            ? createUserWithEmailAndPassword(
+                auth,
+                values.email,
+                values.password
               )
-              .catch((err) => console.error(err));
+                .then(() =>
+                  updateProfile(auth.currentUser, {
+                    displayName: values.displayName,
+                  })
+                )
+                // .then((userCredential) => {
+                //   // Signed up
+                //   const user = userCredential.user;
+                //   console.log("user", user);
+                // })
+                .catch((err) => console.error(err))
+            : signInWithEmailAndPassword(
+                auth,
+                values.email,
+                values.password
+              )
+                // .then((userCredential) => {
+                //   // Signed in
+                //   const user = userCredential.user;
+                //   // ...
+                // })
+                .catch((error) => {
+                  const errorCode = error.code;
+                  const errorMessage = error.message;
+                });
           // console.log("values", values);
           // const { cardTitle: title, cardDescr: description } = values;
           // const form = {

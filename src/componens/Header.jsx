@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import {
   Auth,
   HeaderWrap,
@@ -10,16 +10,36 @@ import {
   NavItem,
   Register,
 } from "./Header.styled";
-import Modal from "./Modal";
 import { ModalForm } from "./ModalForm";
+// import { auth } from "../firebase";
+import { signOut } from "firebase/auth";
+import { Context } from "../main";
 
 export const Header = () => {
+  const { auth } = useContext(Context);
   const [showModal, setShowModal] = useState(false);
   const [nameForm, setNameForm] = useState("");
+  const [inOut, setInOut] = useState("Registration");
+  console.log("auth", auth.currentUser);
+
+  useEffect(() => {
+    auth.currentUser ? setInOut("Log out") : setInOut("Registration");
+  }, [auth.currentUser]);
 
   const onClick = (e) => {
     setShowModal(true);
     setNameForm(e.target.innerText);
+  };
+
+  const onOut = (e) => {
+    signOut(auth)
+      .then(() => {
+        console.log();
+        setInOut("Registration");
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   const onClose = () => {
@@ -38,8 +58,14 @@ export const Header = () => {
           <NavItem to={"/teachers"}>Teachers</NavItem>
         </Nav>
         <Auth>
-          <Login onClick={onClick}>Log in</Login>
-          <Register onClick={onClick}>Registration</Register>
+          {auth.currentUser ? (
+            <Register onClick={onOut}>{inOut}</Register>
+          ) : (
+            <>
+              <Login onClick={onClick}>Log in</Login>
+              <Register onClick={onClick}>{inOut}</Register>
+            </>
+          )}
         </Auth>
       </HeaderWrap>
       {showModal && (
