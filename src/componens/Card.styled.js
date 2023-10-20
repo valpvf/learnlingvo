@@ -4,14 +4,18 @@ export const WrapCard = styled.article`
   display: flex;
   gap: min(48px, calc(48 / 1440 * 100vw));
   width: 100%;
-  margin: 0 auto;
+  margin: 0 auto 32px;
   padding: min(24px, calc(24 / 1440 * 100vw));
   border-radius: 24px;
   background: #fff;
+  &:last-of-type {
+    margin-bottom: 0;
+  }
 `;
 
 export const WrapAvatar = styled.div`
   display: flex;
+  flex-shrink: 0;
   align-items: center;
   justify-content: center;
   width: 120px;
@@ -20,6 +24,11 @@ export const WrapAvatar = styled.div`
   border: 3px solid #fbe9ba;
   background: #fff;
   object-fit: cover;
+`;
+export const WrapInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
 `;
 
 export const ImgCard = styled.img`
@@ -53,11 +62,28 @@ export const InfoCard = styled.ul`
   margin-left: 149px;
 `;
 
-export const InfoItem = styled.li`
+export const InfoHead = styled.li`
   font-size: 1rem;
   font-weight: 500;
   line-height: 1.5;
-  & span {
+  span {
     color: #38cd3e;
+  }
+`;
+
+export const InfoItem = styled.li`
+  margin-bottom: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.5;
+  color: #8a8a89;
+  span {
+    color: initial;
+  }
+  &:first-of-type span {
+    text-decoration-line: underline;
+  }
+  &:last-of-type {
+    margin-bottom: 0;
   }
 `;

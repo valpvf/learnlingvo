@@ -4,10 +4,14 @@ import {
   HeadName,
   ImgCard,
   InfoCard,
+  InfoHead,
   InfoItem,
   WrapAvatar,
   WrapCard,
+  WrapInfo,
 } from "./Card.styled";
+import { Review } from "./Review";
+import noAvatar from "../assets/img/noavatar.svg";
 
 export const Card = ({ el }) => {
   return (
@@ -18,35 +22,39 @@ export const Card = ({ el }) => {
           alt={`${el.name} ${el.surname}`}
         />
       </WrapAvatar>
-      <div>
+      <WrapInfo>
         <HeadCard>
           <div>
             <HeadLanguage>Languages</HeadLanguage>
             <HeadName>{`${el.name} ${el.surname}`}</HeadName>
           </div>
           <InfoCard>
-            <InfoItem>Lessons online</InfoItem>
-            <InfoItem>Lessons done: {el.lessons_done}</InfoItem>
-            <InfoItem>Rating: {el.rating}</InfoItem>
-            <InfoItem>
+            <InfoHead>Lessons online</InfoHead>
+            <InfoHead>Lessons done: {el.lessons_done}</InfoHead>
+            <InfoHead>Rating: {el.rating}</InfoHead>
+            <InfoHead>
               Price / 1 hour:
               <span> {el.price_per_hour}$</span>
-            </InfoItem>
+            </InfoHead>
           </InfoCard>
         </HeadCard>
         <ul>
-          <li>
+          <InfoItem>
             Speaks: <span>{el.languages.join(", ")}</span>
-          </li>
-          <li>
+          </InfoItem>
+          <InfoItem>
             Lesson Info: <span>{el.lesson_info}</span>
-          </li>
-          <li>
+          </InfoItem>
+          <InfoItem>
             Conditions: <span>{el.conditions.join(" ")}</span>
-          </li>
+          </InfoItem>
         </ul>
+        <button>Read more</button>
         <p>{el.experience}</p>
-      </div>
+        {el.reviews.map((item) => (
+          <Review key={item.comment} item={item} image={noAvatar} />
+        ))}
+      </WrapInfo>
     </WrapCard>
   );
 };

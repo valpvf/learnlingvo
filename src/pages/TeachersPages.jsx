@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Card } from "../componens/Card";
 import { dataDB } from "../firebase";
 import { onValue } from "firebase/database";
+import { TeacherWrap } from "./TeachersPages.styled";
 // import { getDatabase, ref, child, get } from "firebase/database";
 
 // const dbRef = ref(getDatabase());
@@ -25,14 +26,14 @@ export const Teachers = () => {
       setRenderData(data);
     });
   }, [dataDB]);
-  console.log("renderData[1]", renderData);
+  // console.log("renderData", renderData);
 
   return (
-    <>
+    <TeacherWrap>
       {renderData &&
         renderData.map((el) => (
           <Card key={`${el.name} ${el.surname}`} el={el} />
         ))}
-    </>
+    </TeacherWrap>
   );
 };
