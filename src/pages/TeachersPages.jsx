@@ -26,7 +26,7 @@ export const Teachers = () => {
       setRenderData(data);
     });
   }, [dataDB]);
-  // console.log("renderData", renderData);
+  console.log("renderData", renderData);
 
   return (
     <TeacherWrap>

@@ -11,7 +11,8 @@ import {
   WrapInfo,
 } from "./Card.styled";
 import { Review } from "./Review";
-import noAvatar from "../assets/img/noavatar.svg";
+import sprite from "../assets/img/sprite.svg";
+import image from "../assets/img/noavatar.svg";
 
 export const Card = ({ el }) => {
   return (
@@ -37,6 +38,13 @@ export const Card = ({ el }) => {
               <span> {el.price_per_hour}$</span>
             </InfoHead>
           </InfoCard>
+          <svg
+            width={26}
+            height={26}
+            style={{ fill: "transparent", stroke: "#121417" }}
+          >
+            <use href={`${sprite}#icon-heart`}></use>
+          </svg>
         </HeadCard>
         <ul>
           <InfoItem>
@@ -52,7 +60,7 @@ export const Card = ({ el }) => {
         <button>Read more</button>
         <p>{el.experience}</p>
         {el.reviews.map((item) => (
-          <Review key={item.comment} item={item} image={noAvatar} />
+          <Review key={item.comment} item={item} image={image} />
         ))}
       </WrapInfo>
     </WrapCard>

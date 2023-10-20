@@ -2,25 +2,22 @@ import styled from "@emotion/styled";
 
 export const ReviewCard = styled.div`
   display: flex;
+  align-items: center;
   gap: 12px;
 `;
 export const ReviewName = styled.p`
   color: #8a8a89;
-  font-size: 1rem;
-  font-weight: 500;
-  line-height: 1.5;
+  font-size: clamp(10px, 1.11cqi, 16px);
 `;
+
 export const ReviewRaiting = styled.p`
   display: inline-block;
-  margin-left: 8px;
-  font-size: calc(14rem / 16);
-  font-weight: 500;
+  margin-left: clamp(5px, 0.55cqi, 8px);
+  font-size: clamp(9px, 0.97cqi, 14px);
   line-height: 1.286;
 `;
 
 export const ReviewText = styled.p`
-  margin-top: 16px;
-  font-size: 1rem;
-  font-weight: 500;
-  line-height: 1.5;
+  margin-top: clamp(10px, 1.11cqi, 16px);
+  font-size: clamp(10px, 1.11cqi, 16px);
 `;

@@ -3,6 +3,8 @@
 html {
   font-size: clamp(10px, 3.5vw, 16px);
   box-sizing: border-box;
+  font-weight: 500;
+  line-height: 1.5;
 }
 
 /* body {

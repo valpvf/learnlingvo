@@ -4,7 +4,7 @@ import {
   ReviewRaiting,
   ReviewText,
 } from "./Review.styled";
-import star from "../assets/img/sprite.svg";
+import sprite from "../assets/img/sprite.svg";
 
 export const Review = ({ item, image }) => {
   return (
@@ -14,7 +14,7 @@ export const Review = ({ item, image }) => {
         <div>
           <ReviewName>{item.reviewer_name}</ReviewName>
           <svg width={16} height={16}>
-            <use href={`${star}#icon-star`}></use>
+            <use href={`${sprite}#icon-star`}></use>
           </svg>
           <ReviewRaiting>
             {item.reviewer_rating.toFixed(1)}
