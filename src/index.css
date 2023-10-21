@@ -1,15 +1,18 @@
 @import './assets/fonts/roboto.css';
 
+:root {
+  --text: #121417;
+  --color: #F4C550;
+  --background: #FBE9BA;
+  --notebook: #D08F38;
+}
+
 html {
   font-size: clamp(10px, 3.5vw, 16px);
-  box-sizing: border-box;
+  /* box-sizing: border-box; */
   font-weight: 500;
   line-height: 1.5;
 }
-
-/* body {
-  overflow: hidden;
-} */
 
 *,
 ::after,
@@ -18,11 +21,9 @@ html {
 }
 
 body {
-  color: var(--primary-text-color);
-  background-color: var(--primary-bg-clr);
   font-family: "Roboto", sans-serif;
   font-style: normal;
-  color: #121417;
+  color: var(--text);
 }
 
 

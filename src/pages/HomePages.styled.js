@@ -6,7 +6,7 @@ export const HomeWrap = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 99vh;
+  height: 100vh;
   min-width: 290px;
   max-width: 1312px;
   width: 100%;
@@ -17,9 +17,10 @@ export const HomeWrap = styled.div`
 
 export const Main = styled.main`
   display: flex;
-  /* flex-wrap: wrap; */
+  flex-wrap: wrap;
   justify-content: space-between;
   gap: 1.7%;
+  width: max(auto, 1440px);
 `;
 
 export const Hero = styled.section`
@@ -37,7 +38,7 @@ export const Title = styled.h1`
   line-height: 1.17;
   letter-spacing: -0.96px;
   & em {
-    background-color: #fbe9ba;
+    background-color: var(--background);
   }
 `;
 
@@ -47,7 +48,7 @@ export const HeroButton = styled.a`
   line-height: 1.56;
   padding: 1rem 5.5rem;
   border-radius: 12px;
-  background-color: #f4c550;
+  background-color: var(--color);
 `;
 
 export const Text = styled.p`
@@ -63,7 +64,6 @@ export const Visual = styled.section`
   width: 43.4%;
   flex-basis: 568px;
   aspect-ratio: calc(570 / 500);
-  /* height: 100%; */
   border-radius: 30px;
   background: url(${boy}),
     linear-gradient(
@@ -90,7 +90,7 @@ export const Apple = styled.svg`
   mask-position: 0 0;
   mask-repeat: no-repeat;
   mask-size: contain; */
-  fill: #fbe9ba;
+  fill: var(--background);
   /* linear-gradient(180deg, #fbe9ba 0%, #e7c885 100%); */
 `;
 

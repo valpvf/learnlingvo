@@ -3,6 +3,7 @@ import {
   Auth,
   HeaderWrap,
   Login,
+  LoginImg,
   Logo,
   LogoImg,
   LogoTxt,
@@ -11,19 +12,22 @@ import {
   Register,
 } from "./Header.styled";
 import { ModalForm } from "./ModalForm";
-// import { auth } from "../firebase";
+import { auth } from "../firebase";
 import { signOut } from "firebase/auth";
 import { Context } from "../main";
+import sprite from "../assets/img/sprite.svg";
 
 export const Header = () => {
-  const { auth } = useContext(Context);
+  // const { auth } = useContext(Context);
   const [showModal, setShowModal] = useState(false);
   const [nameForm, setNameForm] = useState("");
   const [inOut, setInOut] = useState("Registration");
   console.log("auth", auth.currentUser);
 
   useEffect(() => {
-    auth.currentUser ? setInOut("Log out") : setInOut("Registration");
+    auth?.currentUser
+      ? setInOut("Log out")
+      : setInOut("Registration");
   }, [auth.currentUser]);
 
   const onClick = (e) => {
@@ -62,7 +66,13 @@ export const Header = () => {
             <Register onClick={onOut}>{inOut}</Register>
           ) : (
             <>
-              <Login onClick={onClick}>Log in</Login>
+              <Login onClick={onClick}>
+                {" "}
+                <LoginImg>
+                  <use href={`${sprite}#icon-login`}></use>
+                </LoginImg>{" "}
+                Log in
+              </Login>
               <Register onClick={onClick}>{inOut}</Register>
             </>
           )}
