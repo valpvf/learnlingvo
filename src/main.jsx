@@ -10,10 +10,11 @@ export const Context = createContext(null);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <Context.Provider value={{ auth } || []}>
+    <Context.Provider value={{ auth }}>
       <BrowserRouter basename="/learnlingvo">
         <App />
       </BrowserRouter>
     </Context.Provider>
+    //{" "}
   </React.StrictMode>
 );

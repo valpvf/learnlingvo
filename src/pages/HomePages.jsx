@@ -13,8 +13,11 @@ import sprite from "../assets/img/sprite.svg";
 import { Footer } from "../componens/Footer";
 import { Header } from "../componens/Header";
 import { auth } from "../firebase";
+import { Context } from "../main";
+import { useContext } from "react";
 
 export const Home = () => {
+  const { auth } = useContext(Context);
   console.log("app", auth);
   return (
     <HomeWrap>

@@ -12,13 +12,13 @@ import {
   Register,
 } from "./Header.styled";
 import { ModalForm } from "./ModalForm";
-import { auth } from "../firebase";
+// import { auth } from "../firebase";
 import { signOut } from "firebase/auth";
 import { Context } from "../main";
 import sprite from "../assets/img/sprite.svg";
 
 export const Header = () => {
-  // const { auth } = useContext(Context);
+  const { auth } = useContext(Context);
   const [showModal, setShowModal] = useState(false);
   const [nameForm, setNameForm] = useState("");
   const [inOut, setInOut] = useState("Registration");

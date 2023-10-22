@@ -21,15 +21,9 @@ export const WrapAvatar = styled.div`
   width: clamp(20px, 10cqw, 120px);
   height: clamp(20px, 10cqw, 120px);
   border-radius: 50%;
-  border: 3px solid #fbe9ba;
+  border: 3px solid var(--background);
   background: #fff;
   object-fit: cover;
-`;
-export const WrapInfo = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: clamp(16px, 2.25cqi, 32px);
-  font-size: clamp(10px, 1.11cqi, 16px);
 `;
 
 export const ImgCard = styled.img`
@@ -38,8 +32,17 @@ export const ImgCard = styled.img`
   border-radius: 50%;
 `;
 
+export const WrapInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: clamp(16px, 2.25cqi, 32px);
+  font-size: clamp(10px, 1.11cqi, 16px);
+  width: 100%;
+`;
+
 export const HeadCard = styled.div`
   display: flex;
+  flex-wrap: wrap;
   align-items: flex-start;
   justify-content: space-between;
 `;
@@ -56,6 +59,8 @@ export const HeadName = styled.h2`
 
 export const InfoCard = styled.ul`
   display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
   gap: clamp(16px, 2.25cqi, 32px);
   font-size: clamp(10px, 1.11cqi, 16px);
 `;
@@ -77,5 +82,32 @@ export const InfoItem = styled.li`
   }
   &:last-of-type {
     margin-bottom: 0;
+  }
+`;
+
+export const InfoMore = styled.button`
+  background: none;
+  border: none;
+  text-align: left;
+  padding: 0;
+  color: #121417;
+  font-weight: 500;
+  text-decoration-line: underline;
+`;
+
+export const ListLevel = styled.ul`
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(4px, 0.55cqi, 8px);
+`;
+export const Level = styled.li`
+  padding: clamp(4px, 0.55cqi, 8px) clamp(6px, 0.95cqi, 12px);
+  font-size: clamp(9px, 0.97cqi, 14px);
+  line-height: 1;
+  border-radius: 35px;
+  border: 1px solid rgba(18, 20, 23, 0.2);
+  &:first-of-type {
+    background: var(--color);
+    border: none;
   }
 `;

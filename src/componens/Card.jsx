@@ -6,6 +6,9 @@ import {
   InfoCard,
   InfoHead,
   InfoItem,
+  InfoMore,
+  Level,
+  ListLevel,
   WrapAvatar,
   WrapCard,
   WrapInfo,
@@ -13,8 +16,13 @@ import {
 import { Review } from "./Review";
 import sprite from "../assets/img/sprite.svg";
 import image from "../assets/img/noavatar.svg";
+import { useState } from "react";
 
 export const Card = ({ el }) => {
+  const [readMore, setReadMore] = useState(false);
+  const notMore = () => {
+    setReadMore(!readMore);
+  };
   return (
     <WrapCard>
       <WrapAvatar>
@@ -37,14 +45,14 @@ export const Card = ({ el }) => {
               Price / 1 hour:
               <span> {el.price_per_hour}$</span>
             </InfoHead>
+            <svg
+              width={26}
+              height={26}
+              style={{ fill: "transparent", stroke: "#121417" }}
+            >
+              <use href={`${sprite}#icon-heart`}></use>
+            </svg>
           </InfoCard>
-          <svg
-            width={26}
-            height={26}
-            style={{ fill: "transparent", stroke: "#121417" }}
-          >
-            <use href={`${sprite}#icon-heart`}></use>
-          </svg>
         </HeadCard>
         <ul>
           <InfoItem>
@@ -57,11 +65,26 @@ export const Card = ({ el }) => {
             Conditions: <span>{el.conditions.join(" ")}</span>
           </InfoItem>
         </ul>
-        <button>Read more</button>
-        <p>{el.experience}</p>
-        {el.reviews.map((item) => (
-          <Review key={item.comment} item={item} image={image} />
-        ))}
+        {!readMore && (
+          <InfoMore InfoMore type="button" onClick={notMore}>
+            Read more
+          </InfoMore>
+        )}
+        {readMore && (
+          <>
+            <p>{el.experience}</p>
+            {el.reviews.map((item) => (
+              <Review key={item.comment} item={item} image={image} />
+            ))}
+          </>
+        )}
+        <ListLevel>
+          {el.levels.map((item) => (
+            <Level key={`${item} ${el.name} ${el.surname}`}>
+              #{item}
+            </Level>
+          ))}
+        </ListLevel>
       </WrapInfo>
     </WrapCard>
   );
