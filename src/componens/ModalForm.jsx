@@ -12,13 +12,14 @@ import {
   ModalTitle,
 } from "./ModalForm.styled";
 import { dataModalForm } from "../assets/constant";
+// import { useContext } from "react";
 import { auth } from "../firebase";
 
 export const ModalForm = ({ onClose, nameForm }) => {
-  // const { auth } = useContext(Context);
+  // const { isAuth } = useContext(Context);
   const isNameForm = Boolean(nameForm === "Registration");
   const data = dataModalForm(isNameForm);
-  console.log("auth", auth.currentUser);
+  console.log("auth.curr", auth.currentUser);
   return (
     <Modal onClose={onClose}>
       <ModalTitle>{nameForm}</ModalTitle>
@@ -59,6 +60,7 @@ export const ModalForm = ({ onClose, nameForm }) => {
                 .catch((error) => {
                   const errorCode = error.code;
                   const errorMessage = error.message;
+                  console.log("errorMessage", errorMessage);
                 });
           // console.log("values", values);
           // const { cardTitle: title, cardDescr: description } = values;

@@ -19,6 +19,7 @@ const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const db = getDatabase();
 export const dataDB = ref(db, "/");
+console.log("444", ref(db, "users"));
 // onValue(dataDB, (snapshot) => {
 //   const data = snapshot.val();
 //   console.log("data", data);

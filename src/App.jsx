@@ -4,14 +4,21 @@
 import { Routes, Route } from "react-router-dom";
 import { Home } from "./pages/HomePages";
 import { Teachers } from "./pages/TeachersPages";
+import { auth } from "./firebase.js";
+import { createContext, useState } from "react";
+
+export const Context = createContext(null);
 
 function App() {
+  const [isAuth, setIsAuth] = useState(auth.currentUser);
   return (
-    <Routes>
-      <Route exact path="/" element={<Home />} />;
-      <Route exact path="/teachers" element={<Teachers />} />;
-      <Route exact path="*" element={<Home />} />
-    </Routes>
+    <Context.Provider value={{ isAuth }}>
+      <Routes>
+        <Route exact path="/" element={<Home />} />;
+        <Route exact path="/teachers" element={<Teachers />} />;
+        <Route exact path="*" element={<Home />} />
+      </Routes>
+    </Context.Provider>
   );
 }
 

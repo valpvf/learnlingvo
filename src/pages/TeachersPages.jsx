@@ -3,6 +3,7 @@ import { Card } from "../componens/Card";
 import { dataDB } from "../firebase";
 import { onValue } from "firebase/database";
 import { TeacherWrap } from "./TeachersPages.styled";
+import { useRender } from "../assets/hooks/renderHook";
 // import { getDatabase, ref, child, get } from "firebase/database";
 
 // const dbRef = ref(getDatabase());
@@ -19,14 +20,12 @@ import { TeacherWrap } from "./TeachersPages.styled";
 //   });
 
 export const Teachers = () => {
-  const [renderData, setRenderData] = useState(null);
-  useEffect(() => {
-    onValue(dataDB, (snapshot) => {
-      const data = snapshot.val();
-      setRenderData(data);
-    });
-  }, [dataDB]);
-  console.log("renderData", renderData);
+  const lang = "";
+  // const level = "C1 Advanced";
+  const level = "";
+  const price = "";
+
+  const renderData = useRender(lang, level, price);
 
   return (
     <TeacherWrap>
