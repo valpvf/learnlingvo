@@ -103,11 +103,11 @@ export const ListLevel = styled.ul`
 export const Level = styled.li`
   padding: clamp(4px, 0.55cqi, 8px) clamp(6px, 0.95cqi, 12px);
   font-size: clamp(9px, 0.97cqi, 14px);
-  line-height: 1;
+  line-height: 1.15;
   border-radius: 35px;
   border: 1px solid rgba(18, 20, 23, 0.2);
   &:first-of-type {
     background: var(--color);
-    border: none;
+    border: transparent;
   }
 `;

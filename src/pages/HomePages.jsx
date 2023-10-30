@@ -12,13 +12,8 @@ import {
 import sprite from "../assets/img/sprite.svg";
 import { Footer } from "../componens/Footer";
 import { Header } from "../componens/Header";
-import { auth } from "../firebase";
-import { Context } from "../App";
-import { useContext } from "react";
 
 export const Home = () => {
-  const { isAuth } = useContext(Context);
-  console.log("app", isAuth);
   return (
     <HomeWrap>
       <Header></Header>

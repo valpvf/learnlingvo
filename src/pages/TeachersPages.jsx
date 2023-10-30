@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Card } from "../componens/Card";
 import { dataDB } from "../firebase";
 import { onValue } from "firebase/database";
 import { TeacherWrap } from "./TeachersPages.styled";
 import { useRender } from "../assets/hooks/renderHook";
+import { Context } from "../App";
 // import { getDatabase, ref, child, get } from "firebase/database";
 
 // const dbRef = ref(getDatabase());
@@ -20,6 +21,8 @@ import { useRender } from "../assets/hooks/renderHook";
 //   });
 
 export const Teachers = () => {
+  const { auth } = useContext(Context);
+  console.log("authTeach", auth);
   const lang = "";
   // const level = "C1 Advanced";
   const level = "";

@@ -12,21 +12,21 @@ import {
   Register,
 } from "./Header.styled";
 import { ModalForm } from "./ModalForm";
-// import { auth } from "../firebase";
+import { auth } from "../firebase";
 import { signOut } from "firebase/auth";
-import { Context } from "../App";
 import sprite from "../assets/img/sprite.svg";
+import { DataState } from "../DataContext";
 
 export const Header = () => {
-  const { isAuth } = useContext(Context);
+  const { user } = DataState();
   const [showModal, setShowModal] = useState(false);
   const [nameForm, setNameForm] = useState("");
   const [inOut, setInOut] = useState("Registration");
-  console.log("auth", isAuth);
+  console.log("user", user);
 
   useEffect(() => {
-    isAuth ? setInOut("Log out") : setInOut("Registration");
-  }, [isAuth]);
+    user ? setInOut("Log out") : setInOut("Registration");
+  }, [user]);
 
   const onClick = (e) => {
     setShowModal(true);
@@ -60,7 +60,7 @@ export const Header = () => {
           <NavItem to={"/teachers"}>Teachers</NavItem>
         </Nav>
         <Auth>
-          {isAuth ? (
+          {user ? (
             <Register onClick={onOut}>{inOut}</Register>
           ) : (
             <>

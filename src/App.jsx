@@ -4,21 +4,21 @@
 import { Routes, Route } from "react-router-dom";
 import { Home } from "./pages/HomePages";
 import { Teachers } from "./pages/TeachersPages";
-import { auth } from "./firebase.js";
+import { auth, app } from "./firebase.js";
 import { createContext, useState } from "react";
+import { EmailAuthProvider } from "firebase/auth";
 
 export const Context = createContext(null);
+const userCred = null;
+const provider = new EmailAuthProvider(app);
 
 function App() {
-  const [isAuth, setIsAuth] = useState(auth.currentUser);
   return (
-    <Context.Provider value={{ isAuth }}>
-      <Routes>
-        <Route exact path="/" element={<Home />} />;
-        <Route exact path="/teachers" element={<Teachers />} />;
-        <Route exact path="*" element={<Home />} />
-      </Routes>
-    </Context.Provider>
+    <Routes>
+      <Route exact path="/" element={<Home />} />;
+      <Route exact path="/teachers" element={<Teachers />} />;
+      <Route exact path="*" element={<Home />} />
+    </Routes>
   );
 }
 

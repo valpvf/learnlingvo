@@ -12,14 +12,16 @@ import {
   ModalTitle,
 } from "./ModalForm.styled";
 import { dataModalForm } from "../assets/constant";
-// import { useContext } from "react";
 import { auth } from "../firebase";
+import { DataState } from "../DataContext";
 
 export const ModalForm = ({ onClose, nameForm }) => {
-  // const { isAuth } = useContext(Context);
+  const { user } = DataState();
   const isNameForm = Boolean(nameForm === "Registration");
   const data = dataModalForm(isNameForm);
   console.log("auth.curr", auth.currentUser);
+  // console.log("userCred", userCred);
+
   return (
     <Modal onClose={onClose}>
       <ModalTitle>{nameForm}</ModalTitle>
@@ -35,16 +37,17 @@ export const ModalForm = ({ onClose, nameForm }) => {
                 values.email,
                 values.password
               )
+                .then((userCredential) => {
+                  // Signed up
+                  const user = userCredential.user;
+                  console.log("user", user);
+                })
                 .then(() =>
                   updateProfile(auth.currentUser, {
                     displayName: values.displayName,
                   })
                 )
-                // .then((userCredential) => {
-                //   // Signed up
-                //   const user = userCredential.user;
-                //   console.log("user", user);
-                // })
+
                 .catch((err) => console.error(err))
             : signInWithEmailAndPassword(
                 auth,
@@ -54,6 +57,7 @@ export const ModalForm = ({ onClose, nameForm }) => {
                 .then((userCredential) => {
                   // Signed in
                   const user = userCredential.user;
+                  userCred((old) => ({ ...old, user }));
                   console.log("user", user);
                   // ...
                 })

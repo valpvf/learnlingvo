@@ -1,4 +1,4 @@
-import { onValue } from "firebase/database";
+import { onValue, push, set } from "firebase/database";
 import { useEffect, useState } from "react";
 import { dataDB } from "../../firebase";
 
@@ -24,6 +24,10 @@ export const useRender = (lang, level, price) => {
         : setRenderData(data);
     });
   }, [dataDB]);
+  // const newPostRef = push(dataDB);
+  // set(newPostRef, {
+  //   ...dataDB.key,
+  // });
 
   console.log("renderData", renderData);
   return renderData;

@@ -1,14 +1,17 @@
-import React, { createContext, useState } from "react";
+import React from "react";
 import ReactDOM from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
 import App from "./App.jsx";
+import DataContext from "./DataContext.jsx";
 import "normalize.css";
 import "./index.css";
-import { BrowserRouter } from "react-router-dom";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <BrowserRouter basename="/learnlingvo">
-      <App />
-    </BrowserRouter>
+    <DataContext>
+      <BrowserRouter basename="/learnlingvo">
+        <App />
+      </BrowserRouter>
+    </DataContext>
   </React.StrictMode>
 );
