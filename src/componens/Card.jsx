@@ -1,7 +1,13 @@
+import { useState } from "react";
+import { DataState } from "../DataContext";
+import { Review } from "./Review";
+import sprite from "../assets/img/sprite.svg";
+import image from "../assets/img/noavatar.svg";
 import {
   HeadCard,
   HeadLanguage,
   HeadName,
+  Heart,
   ImgCard,
   InfoCard,
   InfoHead,
@@ -13,13 +19,29 @@ import {
   WrapCard,
   WrapInfo,
 } from "./Card.styled";
-import { Review } from "./Review";
-import sprite from "../assets/img/sprite.svg";
-import image from "../assets/img/noavatar.svg";
-import { useState } from "react";
+import { ref, remove, update } from "firebase/database";
+import { db } from "../firebase";
 
 export const Card = ({ el }) => {
+  const { user } = DataState();
+  let idUser = user.uid;
+  // console.log("object", el?.like[idUser]);
+  // console.log("idUser", idUser);
   const [readMore, setReadMore] = useState(false);
+  const [mark, setMark] = useState(el?.like[idUser] || false);
+  // const [colr, setColr] = useState(["transparent", "#121417"]);
+  // console.log("user.uid", user?.uid);
+  const changeMark = () => {
+    // mark
+    //   ? setColr(["#F4C550", "transparent"])
+    //   : setColr(["transparent", "#121417"]);
+    const dbRef = ref(db);
+    const updates = {};
+    updates[`/teacher/${el.id}/like/${user.uid}`] = !mark;
+    update(dbRef, updates);
+    setMark((prev) => !mark);
+  };
+
   const notMore = () => {
     setReadMore(!readMore);
   };
@@ -45,13 +67,15 @@ export const Card = ({ el }) => {
               Price / 1 hour:
               <span> {el.price_per_hour}$</span>
             </InfoHead>
-            <svg
+            <Heart
+              mark={mark}
               width={26}
               height={26}
-              style={{ fill: "transparent", stroke: "#121417" }}
+              // style={{ stroke: colr[1] }}
+              onClick={changeMark}
             >
               <use href={`${sprite}#icon-heart`}></use>
-            </svg>
+            </Heart>
           </InfoCard>
         </HeadCard>
         <ul>

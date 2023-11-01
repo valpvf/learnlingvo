@@ -6,7 +6,13 @@ export const useRender = (lang, level, price) => {
   const [renderData, setRenderData] = useState([]);
   useEffect(() => {
     onValue(dataDB, (snapshot) => {
-      const data = snapshot.val();
+      const data = [];
+      snapshot.forEach((childSnapshot) => {
+        const childKey = childSnapshot.key;
+        const childData = childSnapshot.val();
+        childData.id = childKey;
+        data.push(childData);
+      });
       lang
         ? setRenderData(
             data.filter((el) => el.languages.includes(lang))
@@ -29,6 +35,6 @@ export const useRender = (lang, level, price) => {
   //   ...dataDB.key,
   // });
 
-  console.log("renderData", renderData);
+  // console.log("renderData", renderData);
   return renderData;
 };

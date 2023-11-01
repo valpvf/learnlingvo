@@ -35,11 +35,25 @@ export const app = initializeApp(firebaseConfig);
 //     browserLocalPersistence,
 //     browserSessionPersistence,
 //   ],
-//   // popupRedirectResolver: browserPopupRedirectResolver,
+//   popupRedirectResolver: browserPopupRedirectResolver,
 // });
 export const auth = getAuth(app);
 export const db = getDatabase();
 export const dataDB = ref(db, "teacher/");
+// onValue(dataDB, (snapshot) => {
+//   const vvv = [];
+//   snapshot.forEach((childSnapshot) => {
+//     const childKey = childSnapshot.key;
+//     const childData = childSnapshot.val();
+//     childData.id = childKey;
+//     //     console.log("child", childKey, childData);
+//     //     // ...
+//     //   });
+//     vvv.push(childData);
+//     // console.log("vvv", childData);
+//   });
+//   console.log("vvvArr", vvv);
+// });
 
 // const userDB = ref(db, "user/");
 // console.log("authIn", auth);
@@ -56,8 +70,8 @@ export const dataDB = ref(db, "teacher/");
 //     console.log("child", childKey, childData);
 //     // ...
 //   });
-//   // const data = snapshot.val();
-//   // console.log("dataUser", data);
+//   const data = snapshot.val();
+//   console.log("dataUser", data);
 // });
 // const postListRef = ref(db, "user");
 // const newPostRef = push(postListRef);

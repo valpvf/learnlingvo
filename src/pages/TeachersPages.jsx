@@ -5,6 +5,7 @@ import { onValue } from "firebase/database";
 import { TeacherWrap } from "./TeachersPages.styled";
 import { useRender } from "../assets/hooks/renderHook";
 import { Context } from "../App";
+import { DataState } from "../DataContext";
 // import { getDatabase, ref, child, get } from "firebase/database";
 
 // const dbRef = ref(getDatabase());
@@ -21,21 +22,19 @@ import { Context } from "../App";
 //   });
 
 export const Teachers = () => {
-  const { auth } = useContext(Context);
-  console.log("authTeach", auth);
+  const { user } = DataState();
   const lang = "";
   // const level = "C1 Advanced";
   const level = "";
   const price = "";
 
   const renderData = useRender(lang, level, price);
+  // console.log("renderData", renderData);
 
   return (
     <TeacherWrap>
       {renderData &&
-        renderData.map((el) => (
-          <Card key={`${el.name} ${el.surname}`} el={el} />
-        ))}
+        renderData.map((el) => <Card key={`${el.id}`} el={el} />)}
     </TeacherWrap>
   );
 };

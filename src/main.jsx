@@ -7,11 +7,11 @@ import "normalize.css";
 import "./index.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <DataContext>
-      <BrowserRouter basename="/learnlingvo">
-        <App />
-      </BrowserRouter>
-    </DataContext>
-  </React.StrictMode>
+  // <React.StrictMode>
+  <DataContext>
+    <BrowserRouter basename="/learnlingvo">
+      <App />
+    </BrowserRouter>
+  </DataContext>
+  // </React.StrictMode>
 );

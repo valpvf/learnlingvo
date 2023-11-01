@@ -71,6 +71,11 @@ export const InfoHead = styled.li`
   }
 `;
 
+export const Heart = styled.svg`
+  fill: ${(props) => (props.mark ? "#F4C550" : "transparent")};
+  stroke: ${(props) => (props.mark ? "transparent" : "#121417")};
+`;
+
 export const InfoItem = styled.li`
   margin-bottom: clamp(5px, 0.55cqi, 8px);
   color: #8a8a89;
