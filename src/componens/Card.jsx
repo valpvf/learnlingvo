@@ -24,7 +24,7 @@ import { db } from "../firebase";
 
 export const Card = ({ el }) => {
   const { user } = DataState();
-  let idUser = user.uid;
+  let idUser = user?.uid;
   // console.log("object", el?.like[idUser]);
   // console.log("idUser", idUser);
   const [readMore, setReadMore] = useState(false);
@@ -67,13 +67,7 @@ export const Card = ({ el }) => {
               Price / 1 hour:
               <span> {el.price_per_hour}$</span>
             </InfoHead>
-            <Heart
-              mark={mark}
-              width={26}
-              height={26}
-              // style={{ stroke: colr[1] }}
-              onClick={changeMark}
-            >
+            <Heart mark={mark} onClick={changeMark}>
               <use href={`${sprite}#icon-heart`}></use>
             </Heart>
           </InfoCard>

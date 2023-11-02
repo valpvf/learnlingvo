@@ -72,6 +72,8 @@ export const InfoHead = styled.li`
 `;
 
 export const Heart = styled.svg`
+  width: clamp(12px, 1.85cqi, 26px);
+  height: clamp(12px, 1.85cqi, 26px);
   fill: ${(props) => (props.mark ? "#F4C550" : "transparent")};
   stroke: ${(props) => (props.mark ? "transparent" : "#121417")};
 `;

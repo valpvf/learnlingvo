@@ -1,8 +1,13 @@
-import { onValue, push, set } from "firebase/database";
+import { onValue } from "firebase/database";
 import { useEffect, useState } from "react";
 import { dataDB } from "../../firebase";
+import { DataState } from "../../DataContext";
 
-export const useRender = (lang, level, price) => {
+export const useRender = (lang, level, price, favourite) => {
+  const { user } = DataState();
+  let uid = null;
+  if (user) uid = user.uid;
+  console.log("userHook", user);
   const [renderData, setRenderData] = useState([]);
   useEffect(() => {
     onValue(dataDB, (snapshot) => {
@@ -27,6 +32,9 @@ export const useRender = (lang, level, price) => {
         ? setRenderData(
             data.filter((el) => el.price_per_hour == price)
           )
+        : setRenderData(data);
+      user && favourite
+        ? setRenderData(data.filter((el) => el.like[uid] === true))
         : setRenderData(data);
     });
   }, [dataDB]);

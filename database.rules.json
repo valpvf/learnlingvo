@@ -1,11 +1,8 @@
 {
   "rules": {
-    ".read": true,
-      ".write": true,
-    "users": {      
-      "$uid": {        
-        ".write": true
-      }
+    "teacher": {
+      ".read": true,
+      ".write": "auth.uid !== null"
     }
   }
 }

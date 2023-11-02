@@ -27,9 +27,13 @@ export const Teachers = () => {
   // const level = "C1 Advanced";
   const level = "";
   const price = "";
+  const favourite = false;
 
-  const renderData = useRender(lang, level, price);
-  // console.log("renderData", renderData);
+  const renderData = useRender(lang, level, price, favourite);
+  const prices = [
+    ...new Set(renderData.flatMap((item) => item.price_per_hour)),
+  ].sort((a, b) => a - b);
+  console.log("renderData", renderData, prices);
 
   return (
     <TeacherWrap>
