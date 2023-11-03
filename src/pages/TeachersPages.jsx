@@ -1,11 +1,11 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Card } from "../componens/Card";
-import { dataDB } from "../firebase";
-import { onValue } from "firebase/database";
 import { TeacherWrap } from "./TeachersPages.styled";
 import { useRender } from "../assets/hooks/renderHook";
 import { Context } from "../App";
 import { DataState } from "../DataContext";
+import { Header } from "../componens/Header";
+import { SelectEl } from "../componens/SelectEl";
 // import { getDatabase, ref, child, get } from "firebase/database";
 
 // const dbRef = ref(getDatabase());
@@ -22,23 +22,36 @@ import { DataState } from "../DataContext";
 //   });
 
 export const Teachers = () => {
+  const [favourite, setFavourite] = useState(null);
+  // const [renderData, setRenderData] = useState(false);
   const { user } = DataState();
   const lang = "";
   // const level = "C1 Advanced";
   const level = "";
   const price = "";
-  const favourite = false;
+  useEffect(() => {
+    const typeSite =
+      location.pathname === "/learnlingvo/teachers" ? false : true;
+    setFavourite((prev) => typeSite);
+  }, [location.pathname]);
+
+  console.log("favourite", favourite);
 
   const renderData = useRender(lang, level, price, favourite);
+
   const prices = [
-    ...new Set(renderData.flatMap((item) => item.price_per_hour)),
+    ...new Set(renderData.map((item) => item.price_per_hour)),
   ].sort((a, b) => a - b);
   console.log("renderData", renderData, prices);
 
   return (
-    <TeacherWrap>
-      {renderData &&
-        renderData.map((el) => <Card key={`${el.id}`} el={el} />)}
-    </TeacherWrap>
+    <>
+      <Header></Header>
+      <TeacherWrap>
+        <SelectEl></SelectEl>
+        {renderData &&
+          renderData.map((el) => <Card key={`${el.id}`} el={el} />)}
+      </TeacherWrap>
+    </>
   );
 };

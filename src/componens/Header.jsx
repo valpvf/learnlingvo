@@ -22,7 +22,7 @@ export const Header = () => {
   const [showModal, setShowModal] = useState(false);
   const [nameForm, setNameForm] = useState("");
   const [inOut, setInOut] = useState("Registration");
-  console.log("user", user);
+  // console.log("user", user);
 
   useEffect(() => {
     user ? setInOut("Log out") : setInOut("Registration");
@@ -57,7 +57,8 @@ export const Header = () => {
         </Logo>
         <Nav>
           <NavItem to={"/"}>Home</NavItem>
-          <NavItem to={"/teachers"}>Teachers</NavItem>
+          <NavItem to={"/teachers"}> Teachers </NavItem>
+          {user && <NavItem to={"/favourite"}> Favourite </NavItem>}
         </Nav>
         <Auth>
           {user ? (

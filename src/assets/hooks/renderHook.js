@@ -7,7 +7,7 @@ export const useRender = (lang, level, price, favourite) => {
   const { user } = DataState();
   let uid = null;
   if (user) uid = user.uid;
-  console.log("userHook", user);
+  // console.log("userHook", user);
   const [renderData, setRenderData] = useState([]);
   useEffect(() => {
     onValue(dataDB, (snapshot) => {
@@ -37,7 +37,7 @@ export const useRender = (lang, level, price, favourite) => {
         ? setRenderData(data.filter((el) => el.like[uid] === true))
         : setRenderData(data);
     });
-  }, [dataDB]);
+  }, [dataDB, favourite]);
   // const newPostRef = push(dataDB);
   // set(newPostRef, {
   //   ...dataDB.key,
