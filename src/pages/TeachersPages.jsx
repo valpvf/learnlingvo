@@ -20,35 +20,73 @@ import { SelectEl } from "../componens/SelectEl";
 //   .catch((error) => {
 //     console.error(error);
 //   });
+const langList = [
+  "French",
+  "English",
+  "German",
+  "Ukrainian",
+  "Polish",
+];
+
+const levelList = [
+  "A1 Beginner",
+  "A2 Elementary",
+  "B1 Intermediate",
+  "B2 Upper-Intermediate",
+  "C1 Advanced",
+  "C2 Proficient",
+];
 
 export const Teachers = () => {
   const [favourite, setFavourite] = useState(null);
-  // const [renderData, setRenderData] = useState(false);
+  const [price, setPrice] = useState("");
+  const [lang, setLang] = useState("");
+  const [level, setLevel] = useState("");
+
   const { user } = DataState();
-  const lang = "";
-  // const level = "C1 Advanced";
-  const level = "";
-  const price = "";
   useEffect(() => {
     const typeSite =
       location.pathname === "/learnlingvo/teachers" ? false : true;
     setFavourite((prev) => typeSite);
   }, [location.pathname]);
 
-  console.log("favourite", favourite);
+  const { renderData, prices, languages } = useRender(
+    lang,
+    level,
+    price,
+    favourite
+  );
 
-  const renderData = useRender(lang, level, price, favourite);
+  console.log("renderData", renderData);
 
-  const prices = [
-    ...new Set(renderData.map((item) => item.price_per_hour)),
-  ].sort((a, b) => a - b);
-  console.log("renderData", renderData, prices);
+  const priceOptions = [{ value: "", label: "All prices" }];
+  const langOptions = [{ value: "", label: "All prices" }];
+  const levelOptions = [{ value: "", label: "All prices" }];
+  prices.map((el) => priceOptions.push({ value: el, label: el }));
+  languages.map((el) => langOptions.push({ value: el, label: el }));
+  levelList.map((el) => levelOptions.push({ value: el, label: el }));
+  // console.log("opt", opt);
+  // const handlePrice = (priceData) => {
+  //   setPrice(priceData);
+  //   console.log("priceData", priceData);
+  // };
 
   return (
     <>
       <Header></Header>
       <TeacherWrap>
-        <SelectEl></SelectEl>
+        <SelectEl
+          opt={langOptions}
+          onChange={(list) => setLang(list)}
+        />
+        <SelectEl
+          opt={levelOptions}
+          onChange={(list) => setLevel(list)}
+        />
+        <SelectEl
+          opt={priceOptions}
+          onChange={(list) => setPrice(list)}
+        />
         {renderData &&
           renderData.map((el) => <Card key={`${el.id}`} el={el} />)}
       </TeacherWrap>

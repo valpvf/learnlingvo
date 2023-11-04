@@ -7,42 +7,88 @@ export const useRender = (lang, level, price, favourite) => {
   const { user } = DataState();
   let uid = null;
   if (user) uid = user.uid;
-  // console.log("userHook", user);
+  const [prices, setPrices] = useState([]);
+  const [languages, setLanguages] = useState([]);
   const [renderData, setRenderData] = useState([]);
   useEffect(() => {
+    const data = [];
     onValue(dataDB, (snapshot) => {
-      const data = [];
       snapshot.forEach((childSnapshot) => {
         const childKey = childSnapshot.key;
         const childData = childSnapshot.val();
         childData.id = childKey;
         data.push(childData);
       });
-      lang
-        ? setRenderData(
-            data.filter((el) => el.languages.includes(lang))
-          )
-        : setRenderData(data);
-      level
-        ? setRenderData(
-            data.filter((el) => el.levels.includes(level))
-          )
-        : setRenderData(data);
-      price
-        ? setRenderData(
-            data.filter((el) => el.price_per_hour == price)
-          )
-        : setRenderData(data);
-      user && favourite
-        ? setRenderData(data.filter((el) => el.like[uid] === true))
-        : setRenderData(data);
+      setRenderData(data);
+      setPrices(
+        [...new Set(data.map((item) => item.price_per_hour))].sort(
+          (a, b) => a - b
+        )
+      );
+      setLanguages(
+        [...new Set(data.flatMap((item) => item.languages))].sort()
+      );
+      // setRenderData(data);
+      // lang === "" &&
+      //   level === "" &&
+      //   price === "" &&
+      //   setRenderData(data);
+      // lang !== "" &&
+      //   setRenderData((prev) =>
+      //     renderData.filter((el) => el.languages.includes(lang))
+      //   );
+      // // level !== "" &&
+      // setRenderData((prev) =>
+      //   renderData.filter((el) => el.levels.includes(level))
+      // );
+      // //
+      if (lang === "" && level === "" && price === "") {
+        setRenderData(data);
+      } else {
+        // let result = renderData
+        setRenderData(
+          renderData.filter((el) => el.languages.includes(lang))
+        );
+        level !== "" &&
+          setRenderData(
+            renderData.filter((el) => el.levels.includes(level))
+          );
+        price !== "" &&
+          setRenderData(
+            renderData.filter((el) => el.price_per_hour == price)
+          );
+        // setRenderData((prev) => result);
+        //   // data.filter((el) => el.languages.includes(lang))
+        // );
+
+        // console.log(
+        //   "renderDataLang",
+        //   renderData,
+        //   // "res",
+        //   // result,
+        //   "data",
+        //   data
+        // );
+      }
+      // setRenderData(
+      //   renderData.filter((el) => el.levels.includes(level))
+      // );
+      // console.log("renderDataLevel", renderData);
+      // setRenderData(
+      //   renderData.filter((el) => el.price_per_hour == price)
+      // );
+      // console.log("renderDataPrice", renderData);
+      // }
+      //   user && favourite
+      //     ? setRenderData(data.filter((el) => el.like[uid] === true))
+      //     : setRenderData(data);
     });
-  }, [dataDB, favourite]);
+  }, [dataDB, favourite, price, lang, level]);
   // const newPostRef = push(dataDB);
   // set(newPostRef, {
   //   ...dataDB.key,
   // });
 
-  // console.log("renderData", renderData);
-  return renderData;
+  console.log("++++renderData", renderData, prices);
+  return { renderData, prices, languages };
 };
