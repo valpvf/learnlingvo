@@ -62,7 +62,9 @@ export const Teachers = () => {
   const priceOptions = [{ value: "", label: "All prices" }];
   const langOptions = [{ value: "", label: "All prices" }];
   const levelOptions = [{ value: "", label: "All prices" }];
-  prices.map((el) => priceOptions.push({ value: el, label: el }));
+  prices.map((el) =>
+    priceOptions.push({ value: el, label: `${el} $` })
+  );
   languages.map((el) => langOptions.push({ value: el, label: el }));
   levelList.map((el) => levelOptions.push({ value: el, label: el }));
   // console.log("opt", opt);
@@ -75,18 +77,27 @@ export const Teachers = () => {
     <>
       <Header></Header>
       <TeacherWrap>
-        <SelectEl
-          opt={langOptions}
-          onChange={(list) => setLang(list)}
-        />
-        <SelectEl
-          opt={levelOptions}
-          onChange={(list) => setLevel(list)}
-        />
-        <SelectEl
-          opt={priceOptions}
-          onChange={(list) => setPrice(list)}
-        />
+        <div
+          style={{
+            display: "flex",
+            marginBottom: 32,
+            // justifyContent: "center",
+            gap: 20,
+          }}
+        >
+          <SelectEl
+            opt={langOptions}
+            onChange={(list) => setLang(list)}
+          />
+          <SelectEl
+            opt={levelOptions}
+            onChange={(list) => setLevel(list)}
+          />
+          <SelectEl
+            opt={priceOptions}
+            onChange={(list) => setPrice(list)}
+          />
+        </div>
         {renderData &&
           renderData.map((el) => <Card key={`${el.id}`} el={el} />)}
       </TeacherWrap>

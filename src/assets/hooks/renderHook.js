@@ -42,6 +42,10 @@ export const useRender = (lang, level, price, favourite) => {
       //   renderData.filter((el) => el.levels.includes(level))
       // );
       // //
+      user && favourite
+        ? setRenderData(data.filter((el) => el.like[uid] === true))
+        : setRenderData(data);
+
       if (lang === "" && level === "" && price === "") {
         setRenderData(data);
       } else {
@@ -79,9 +83,6 @@ export const useRender = (lang, level, price, favourite) => {
       // );
       // console.log("renderDataPrice", renderData);
       // }
-      //   user && favourite
-      //     ? setRenderData(data.filter((el) => el.like[uid] === true))
-      //     : setRenderData(data);
     });
   }, [dataDB, favourite, price, lang, level]);
   // const newPostRef = push(dataDB);

@@ -1,17 +1,25 @@
 import { validateYupSchema } from "formik";
 import Select from "react-select";
-// const options = [
-//   { value: "French", label: "French" },
-//   { value: "English", label: "English" },
-//   { value: "German", label: "German" },
-//   { value: "Ukrainian", label: "Ukrainian" },
-//   { value: "Polish", label: "Polish" },
-// ];
+import { SelectStyled } from "./SelectEl.styled";
+
 export const SelectEl = ({ opt, onChange }) => {
   return (
-    <Select
+    <SelectStyled
+      indicatorSeparator={{}}
       options={opt}
       onChange={(newValue) => onChange(newValue.value)}
+      styles={{
+        control: (baseStyles, state) => ({
+          ...baseStyles,
+          borderRadius: 14,
+          borderColor: "white",
+          color: "white",
+          fontSize: 18,
+        }),
+        indicatorSeparator: (baseStyles, state) => ({
+          isDisabled: true,
+        }),
+      }}
     />
   );
 };
