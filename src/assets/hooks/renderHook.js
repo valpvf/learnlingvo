@@ -42,25 +42,21 @@ export const useRender = (lang, level, price, favourite) => {
       //   renderData.filter((el) => el.levels.includes(level))
       // );
       // //
-      user && favourite
-        ? setRenderData(data.filter((el) => el.like[uid] === true))
-        : setRenderData(data);
+      let result = [];
 
+      result = data;
       if (lang === "" && level === "" && price === "") {
-        setRenderData(data);
+        result = data;
       } else {
-        // let result = renderData
-        setRenderData(
-          renderData.filter((el) => el.languages.includes(lang))
-        );
-        level !== "" &&
-          setRenderData(
-            renderData.filter((el) => el.levels.includes(level))
-          );
-        price !== "" &&
-          setRenderData(
-            renderData.filter((el) => el.price_per_hour == price)
-          );
+        if (lang)
+          result = result.filter((el) => el.languages.includes(lang));
+        console.log("resultLang", result); // result = [...data];
+        if (level)
+          result = result.filter((el) => el.levels.includes(level));
+        console.log("resultLevel", result); // result = [...data];
+        if (price)
+          result = result.filter((el) => el.price_per_hour == price);
+        console.log("resultPrice", result); // result = [...data];
         // setRenderData((prev) => result);
         //   // data.filter((el) => el.languages.includes(lang))
         // );
@@ -74,6 +70,12 @@ export const useRender = (lang, level, price, favourite) => {
         //   data
         // );
       }
+      user && favourite
+        ? (result = result.filter((el) => el.like[uid] === true))
+        : (result = result);
+      setRenderData(result);
+      // console.log("user, favourite", user, favourite, renderData);
+
       // setRenderData(
       //   renderData.filter((el) => el.levels.includes(level))
       // );
@@ -90,6 +92,6 @@ export const useRender = (lang, level, price, favourite) => {
   //   ...dataDB.key,
   // });
 
-  console.log("++++renderData", renderData, prices);
+  // console.log("++++renderData", renderData, prices);
   return { renderData, prices, languages };
 };

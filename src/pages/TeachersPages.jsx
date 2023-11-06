@@ -75,14 +75,16 @@ export const Teachers = () => {
 
   return (
     <>
-      <Header></Header>
       <TeacherWrap>
+        <Header></Header>
         <div
           style={{
             display: "flex",
             marginBottom: 32,
             // justifyContent: "center",
             gap: 20,
+            maxWidth: 1440,
+            padding: 24,
           }}
         >
           <SelectEl

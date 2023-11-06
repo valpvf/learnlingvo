@@ -1,10 +1,8 @@
-import { validateYupSchema } from "formik";
 import Select from "react-select";
-import { SelectStyled } from "./SelectEl.styled";
 
 export const SelectEl = ({ opt, onChange }) => {
   return (
-    <SelectStyled
+    <Select
       indicatorSeparator={{}}
       options={opt}
       onChange={(newValue) => onChange(newValue.value)}
